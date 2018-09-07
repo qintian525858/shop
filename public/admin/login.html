@@ -78,7 +78,7 @@
     </div>    
 </div>
 <script src="../library/angular/angular.min.js"></script>
-   <script src="../library/angular/angular-cookies.min.js"></script>
+<script src="../library/angular/angular-cookies.min.js"></script>
 <script src="../library/assets/js/lib/jquery.js"></script> 
 </body>
 
@@ -92,13 +92,10 @@
             }
             $scope.save_spinner_display = true;
             LoginService.login($scope.username, $scope.password).success(function (data) {
-                console.debug(data);
                 if(data.ret == 0) {
                     $cookieStore.put("username", $scope.username);
                     // $cookieStore.put("permissions", data.data);
-                    $window.localStorage["permissions"]=JSON.stringify(data.data);
-                    $cookieStore.put("role_id_list", data.role_id_list);
-                    window.location = "/app/index.html";
+                    window.location = "/admin/index.html";
                 } else {
                     $scope.save_spinner_display = false;
                     alert(data.msg);
@@ -117,7 +114,7 @@
         }
     }).service('LoginService', ['$http', function ($http) {
         var login = function (username, password) {
-            var url = '/api/user/login';
+            var url = '/api/users/login';
             var data = {username:username,password:password};
             return $http.post(url, data);
         };

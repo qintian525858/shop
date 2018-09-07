@@ -12,39 +12,35 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Illuminate\Log\Writer;
+use Auth;
 
 class UsersController extends Controller {
 
-   
+   	public $logs_path;
     function __construct() {
-
+ 		$this->logs_path = "users";
     }
 
 
     public function login() {
-        $params = $this->getAngularjsParam(true);
-
-        dd($params);
+        //$this->logs($this->logs_path,"111111111111111111111");
+        $params = $this->getAngularjsParam();
         $account = isset($params->username) ? trim($params->username) : "" ;
         $passwd = isset($params->password) ? trim($params->password) : "" ;
 
         if(Auth::attempt(array('name' => $account, 'password' => $passwd))) {
-            $user = Auth::getUser();
-            $role_id_list = $user->roles()->lists('role_id');
-
-            $permissions = DB::table("role_user")->Join('permission_role', function($join) {
-                $join->on('role_user.role_id', '=', 'permission_role.role_id');
-            })->Join('permissions', function($join) {
-                $join->on('permission_role.permission_id', '=', 'permissions.id');
-            })->where("role_user.user_id", $user["id"])->pluck("permissions.name");
-
-            $this->log_op($user["id"], "login", "WEB登录", 'ok', ['id' => $user["id"]]);
-            return response()->json(array('ret' => 0, 'msg' => "ok", 'data' => $permissions,"role_id_list"=>$role_id_list));
+            $adminId = Auth::id();
+            $this->logs($this->logs_path,("用户ID:".$adminId.",".$account."登录成功！"));
+            return response()->json(array('ret' => 0, 'msg' => "ok"));
         } else {
-            $this->log_op(0, "login", "WEB登录", 'error', ['username' => $account]);
-            $this->user_log('error', 'account:' . $account . ', passwd:' . $passwd . ', msg: ' . json_encode(Auth::attempt(array('name' => $account, 'password' => $passwd))));
+            
             return response()->json(array('ret' => 1, 'msg' => "用户名或密码错误"));
         }
+        
+        
     }
 
     

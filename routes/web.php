@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//用户页面
+Route::any('api/users/login', 'UsersController@login');
