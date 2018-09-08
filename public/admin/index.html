@@ -1,1 +1,252 @@
-index.htmlasdasdas
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html>
+<!--<![endif]-->
+
+<head>
+<meta charset="utf-8">
+<title>后台管理</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<!-- Le styles -->
+<link href="../library/assets/css/lib/bootstrap.css" rel="stylesheet">
+<link href="../library/assets/css/lib/bootstrap-responsive.css" rel="stylesheet">
+<link href="../library/assets/css/boo-extension.css" rel="stylesheet">
+<link href="../library/assets/css/boo.css" rel="stylesheet">
+<link href="../library/assets/css/style.css" rel="stylesheet">
+<link href="../library/assets/css/boo-coloring.css" rel="stylesheet">
+<link href="../library/assets/css/boo-utility.css" rel="stylesheet">
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="../library/assets/plugins/selectivizr/selectivizr-min.js"></script>
+    <script src="../library/assets/plugins/flot/excanvas.min.js"></script>
+<![endif]-->
+
+<!-- Le fav and touch icons -->
+<link rel="shortcut icon" href="../library/assets/ico/favicon.ico">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../library/assets/ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../library/assets/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../library/assets/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="../library/assets/ico/apple-touch-icon-57-precomposed.png">
+
+</head>
+
+<body class="sidebar-left " ng-app="myApp" ng-controller="indexCtr">
+<div class="page-container">
+    <div id="header-container">
+        <div id="header">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+              
+                        <div class="nav-collapse collapse">
+                            <ul class="nav user-menu visible-desktop">
+                                <li><a class="btn-glyph fontello-icon-logout-1 tip-bc" href="/api/users/logout" title="退出"></a></li>
+                            </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- // navbar -->
+            
+            <div class="header-drawer">
+                <div class="mobile-nav text-center visible-phone"> <a href="javascript:void(0);" class="mobile-btn" data-toggle="collapse" data-target=".sidebar"><i class="aweso-icon-chevron-down"></i> Components</a> </div>
+                <!-- // Resposive navigation -->
+                <div class="breadcrumbs-nav hidden-phone">
+
+                </div>
+                <!-- // breadcrumbs --> 
+            </div>
+            <!-- // drawer --> 
+        </div>
+    </div>
+    <!-- // header-container -->
+    
+    <div id="main-container">
+        <div id="main-sidebar" class="sidebar sidebar-inverse">
+            <div class="sidebar-item">
+                <div class="media profile">
+                    <div class="media-thumb media-left thumb-bordereb"> <a class="img-shadow" href="javascript:void(0);"><img class="thumb" src="../library/assets/img/demo/demo-avatar9604.jpg"></a> </div>
+                    <div class="media-body">
+                        <h5 class="media-heading" app-username></h5>
+                        <p class="data"></p>
+                    </div>
+                </div>
+            </div>
+            <!-- // sidebar item - profile -->
+            
+            <ul id="mainSideMenu" class="nav nav-list nav-side">
+                <li class="accordion-group">
+                    <div class="accordion-heading"> <a active_href="#accDash" data-parent="#mainSideMenu" data-toggle="collapse" class="accordion-toggle"> <span class="item-icon fontello-icon-monitor"></span> <i class="chevron fontello-icon-right-open-3"></i> 管理员 </a> </div>
+                    <ul class="accordion-content nav nav-list collapse" id="accDash">
+                        <li> <a href="#/users_list"> <i class="fontello-icon-right-dir"></i>管理员列表</a> </li>
+                        <li> <a href="#jurisdiction_list"> <i class="fontello-icon-right-dir"></i>权限列表</a> </li>
+                    </ul>
+                </li>
+                <!-- // item accordionMenu Dashboard -->
+                <li class="accordion-group">
+                    <div class="accordion-heading"> <a href="#accForms" data-parent="#mainSideMenu" data-toggle="collapse" class="accordion-toggle"> <span class="item-icon aweso-icon-list-alt"></span><i class="chevron fontello-icon-right-open-3"></i> Form </a> </div>
+                    <ul class="accordion-content nav nav-list collapse" id="accForms">
+                        <li> <a href="component-form-demo.html"> <i class="fontello-icon-right-dir"></i> Demo Form </a> </li>
+                        <li> <a href="component-form-elements.html"> <i class="fontello-icon-right-dir"></i> Form Element </a> </li>
+                        <li> <a href="component-form-extension.html"> <i class="fontello-icon-right-dir"></i> Form Extension</a> </li>
+                        <li> <a href="component-form-wizard.html"> <i class="fontello-icon-right-dir"></i> Form Wizard</a> </li>
+                    </ul>
+                </li>
+                <!-- // item accordionMenu Forms -->
+                <li class="accordion-group">
+                    <div class="accordion-heading"> <a href="#accComponents" data-parent="#mainSideMenu" data-toggle="collapse" class="accordion-toggle"> <span class="item-icon fontello-icon-align-justify"></span> <i class="chevron fontello-icon-right-open-3"></i> Components </a> </div>
+                    <ul class="accordion-content nav nav-list collapse" id="accComponents">
+                        <li> <a href="elements-notification.html"> <i class="fontello-icon-right-dir"></i> Notification </a> </li>
+                        <li> <a href="component-rangeslider.html"> <i class="fontello-icon-right-dir"></i> Rangeslider </a> </li>
+                        <li> <a href="component-file-upload.html"> <i class="fontello-icon-right-dir"></i> File upload </a> </li>
+                        <li> <a href="component-gallery.html"> <i class="fontello-icon-right-dir"></i> Gallery &amp; Image </a> </li>
+                    </ul>
+                </li>
+          
+            </ul>
+            <!-- // sidebar menu -->
+            
+            <div class="sidebar-item"></div>
+            <!-- // sidebar item --> 
+            
+        </div>
+        <!-- // sidebar  -->
+        
+        <div id="main-content" class="main-content container-fluid" ng-view id="div_main">
+        	    
+    	</div>
+    </div>
+    
+    <footer id="footer-fix">
+        <div id="footer-sidebar" class="footer-sidebar">
+            <div class="navbar">
+                <div class="btn-toolbar"> <a class="btn btn-glyph btn-link" href="javascript:void(0);"><i class="fontello-icon-up-open-1"></i></a> </div>
+            </div>
+        </div>        
+        <div id="footer-content" class="footer-content">
+            <div class="navbar navbar-inverse">
+                <div class="navbar-inner">
+                    <ul class="nav pull-left">
+                        <li class="divider-vertical hidden-phone"></li>
+                        <li><a id="btnToggleSidebar" class="btn-glyph fontello-icon-resize-full-2 tip hidden-phone" href="javascript:void(0);" title="show hide sidebar"></a></li>
+                        <li class="divider-vertical hidden-phone"></li>
+                        <li><a id="btnChangeSidebar" class="btn-glyph fontello-icon-login tip hidden-phone" href="javascript:void(0);" title="change sidebar position"></a></li>
+                        <li class="divider-vertical"></li>
+                        <li><a id="btnChangeSidebarColor" class="btn-glyph fontello-icon-palette tip" href="javascript:void(0);" title="change sidebar color"></a></li>
+                        <li class="divider-vertical"></li>
+                        <li><a class="btn-glyph fontello-icon-cw" href="javascript:void(0);"></a></li>
+                        <li class="divider-vertical"></li>
+                        <li><a class="fontello-icon-home-3" href="dashboard-one.html"></a></li>
+                        <li class="divider-vertical"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+</div>
+<!-- // page-container  --> 
+
+<!-- Le javascript --> 
+<!-- Placed at the end of the document so the pages load faster --> 
+<script src="/library/assets/js/lib/jquery.js"></script> 
+
+<script src="/library/angular/angular.min.js"></script>
+<script src="/library/angular/angular-route.js"></script>
+<script src="/library/angular/angular-sanitize.min.js"></script>
+<script src="/library/angular/angular-cookies.min.js"></script>
+<script src="/library/angular/angular-drag-and-drop-lists.min.js"></script>
+
+<script src="/vendor/ui/ui-bootstrap-tpls-1.3.2.min.js"></script>
+<script src="/admin/scripts/app.js"></script>
+<script src="/vendor/ocLazyLoad.js"></script>
+<script src="/vendor/csv/ng-csv.js"></script>
+
+
+
+<script src="../library/assets/js/lib/jquery-ui.js"></script>
+<script src="../library/assets/js/lib/jquery.cookie.js"></script> 
+<script src="../library/assets/js/lib/jquery.mousewheel.js"></script> 
+<script src="../library/assets/js/lib/jquery.load-image.min.js"></script>
+<script src="../library/assets/js/lib/bootstrap/bootstrap.js"></script> 
+
+<!-- Plugins Bootstrap -->
+<script src="../library/assets/plugins/bootstrap-wysihtml5/lib/js/wysihtml5-0.3.0.min.js"></script> 
+<script src="../library/assets/plugins/bootstrap-wysihtml5/src/bootstrap-wysihtml5.js"></script>
+<script src="../library/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script> 
+<script src="../library/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.js"></script> 
+<script src="../library/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+<script src="../library/assets/plugins/bootstrap-daterangepicker/js/bootstrap-daterangepicker.js"></script> 
+<script src="../library/assets/plugins/bootstrap-toggle-button/js/bootstrap-toggle-button.js"></script> 
+<script src="../library/assets/plugins/bootstrap-fileupload/js/bootstrap-fileupload.js"></script> 
+<script src="../library/assets/plugins/bootstrap-rowlink/js/bootstrap-rowlink.js"></script> 
+<script src="../library/assets/plugins/bootstrap-progressbar/js/bootstrap-progressbar.js"></script> 
+<script src="../library/assets/plugins/bootstrap-select/bootstrap-select.js"></script> 
+<script src="../library/assets/plugins/bootstrap-multiselect/js/bootstrap-multiselect.js"></script> 
+<script src="../library/assets/plugins/bootstrap-bootbox/bootbox.min.js"></script> 
+<script src="../library/assets/plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script> 
+<script src="../library/assets/plugins/bootstrap-modal/js/bootstrap-modal.js"></script> 
+<script src="../library/assets/plugins/bootstrap-wizard/js/bootstrap-wizard.min.js"></script>
+<script src="../library/assets/plugins/bootstrap-wizard-2/js/bwizard-only.min.js"></script>
+<script src="../library/assets/plugins/bootstrap-image-gallery/js/bootstrap-image-gallery.min.js"></script>
+ 
+
+<!-- Plugins Custom - Only example --> 
+<script src="../library/assets/plugins/pl-extension/google-code-prettify/prettify.js"></script>
+
+<!-- Plugins Custom - System --> 
+<script src="../library/assets/plugins/pl-system/nicescroll/jquery.nicescroll.min.js"></script> 
+<script src="../library/assets/plugins/pl-system/xbreadcrumbs/xbreadcrumbs.js"></script> 
+
+<!-- Plugins Custom - System info -->
+<script src="../library/assets/plugins/pl-system-info/qtip2/dist/jquery.qtip.min.js"></script> 
+<script src="../library/assets/plugins/pl-system-info/gritter/js/jquery.gritter.min.js"></script> 
+<script src="../library/assets/plugins/pl-system-info/notyfy/jquery.notyfy.js"></script>
+
+<!-- Plugins Custom - Content -->
+<script src="../library/assets/plugins/pl-content/list/js/list.min.js"></script> 
+<script src="../library/assets/plugins/pl-content/list/plugins/list.paging.min.js"></script>
+<script src="../library/assets/plugins/pl-content/jpages/js/jPages.js"></script> 
+
+<!-- Plugins Custom - Component -->
+<script src="../library/assets/plugins/pl-component/fullcalendar/fullcalendar.min.js"></script> 
+<script src="../library/assets/plugins/pl-component/rangeslider/jqallrangesliders.min.js"></script>
+
+<!-- Plugins Custom - Form -->
+<script src="../library/assets/plugins/pl-form/uniform/jquery.uniform.min.js"></script> 
+<script src="../library/assets/plugins/pl-form/select2/select2.min.js"></script>
+<script src="../library/assets/plugins/pl-form/counter/jquery.counter.js"></script> 
+<script src="../library/assets/plugins/pl-form/elastic/jquery.elastic.js"></script> 
+<script src="../library/assets/plugins/pl-form/inputmask/jquery.inputmask.js"></script> 
+<script src="../library/assets/plugins/pl-form/inputmask/jquery.inputmask.extensions.js"></script> 
+<script src="../library/assets/plugins/pl-form/validate/js/jquery.validate.min.js"></script> 
+<script src="../library/assets/plugins/pl-form/duallistbox/jquery.duallistbox.min.js"></script>
+
+<!-- Plugins Custom - Gallery --> 
+<script src="../library/assets/plugins/pl-gallery/nailthumb/jquery.nailthumb.1.1.min.js"></script> 
+<script src="../library/assets/plugins/pl-gallery/nailthumb/showLoading/js/jquery.showLoading.min.js"></script>
+<script src="../library/assets/plugins/pl-gallery/wookmark/jquery.imagesloaded.js"></script>
+<script src="../library/assets/plugins/pl-gallery/wookmark/jquery.wookmark.min.js"></script>
+ 
+<!-- Plugins Tables --> 
+<script src="../library/assets/plugins/pl-table/datatables/media/js/jquery.dataTables.js"></script> 
+<script src="../library/assets/plugins/pl-table/datatables/plugin/jquery.dataTables.plugins.js"></script> 
+<script src="../library/assets/plugins/pl-table/datatables/plugin/jquery.dataTables.columnFilter.js"></script> 
+
+<!-- main js --> 
+<script src="../library/assets/js/core.js"></script> 
+
+</body>
+</html>

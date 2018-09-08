@@ -9,20 +9,15 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Monolog\Logger;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Formatter\LineFormatter;
-
+use Auth;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function __construct(){
-    	$userid = Auth::id();
-        if ($userid == null) {
-            echo json_encode(array('ret' => 999, 'msg' => "用户未登录"));
-            exit();
-        }
     }
 
-
+    
     //获取路由参数
     protected function getAngularjsParam($type = False)
     {

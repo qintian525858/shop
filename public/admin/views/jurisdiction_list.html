@@ -1,0 +1,45 @@
+
+
+
+<div class="row-fluid page-head">
+    <h2><i class="aweso-icon-table"></i> 管理员 <small>权限列表 </small></h2>
+    <div class="page-bar">
+        <div class="btn-toolbar"> </div>
+    </div>
+</div>           
+<div id="page-content" class="page-content">
+    <section>
+        <div class="row-fluid">
+            <div class="well well-small well-nice">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="widget-header">
+                        <h4><i class="fontello-icon-edit"></i> </h4>
+                        <div class="widget-tool">
+                            <a class="btn btn-green btn-small btn-glyph" href="javascript:void(0);">新　增</a>
+                        </div>
+                    </div>
+                </div>
+             </div>
+                <!-- // navbar -->
+            <div class="table-wrapper">
+                <table class="table boo-table table-content table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>权限</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       <tr ng-repeat="row in list">
+                            <td>{{row.id}}</td>
+                            <td>{{row.name}}</td>
+                            <td>{{row.name}}</td>
+                       </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>                        
+    </section>      
+</div> 

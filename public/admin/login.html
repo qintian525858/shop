@@ -61,10 +61,10 @@
                                     <legend class="two"><span></span></legend>
                                     <ul>
                                         <li>
-                                            <input ng-model="username" class="input-block-level" type="text" name="username" placeholder="账号">
+                                            <input ng-model="username" class="input-block-level" type="text" name="username" placeholder="账号" ng-keypress="search_keypress($event)">
                                         </li>
                                         <li>
-                                            <input ng-model="password" class="input-block-level" type="password" name="password" placeholder="密码">
+                                            <input ng-model="password" class="input-block-level" type="password" name="password" placeholder="密码" ng-keypress="search_keypress($event)">
                                         </li>
                                     </ul>
                                     <button type="button" class="btn btn-envato btn-block btn-large" ng-click="login()">登 录</button>

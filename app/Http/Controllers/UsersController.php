@@ -7,7 +7,9 @@
  */
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -24,9 +26,7 @@ class UsersController extends Controller {
  		$this->logs_path = "users";
     }
 
-
     public function login() {
-        //$this->logs($this->logs_path,"111111111111111111111");
         $params = $this->getAngularjsParam();
         $account = isset($params->username) ? trim($params->username) : "" ;
         $passwd = isset($params->password) ? trim($params->password) : "" ;
@@ -40,7 +40,23 @@ class UsersController extends Controller {
             return response()->json(array('ret' => 1, 'msg' => "用户名或密码错误"));
         }
         
-        
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        $this->logs($this->logs_path,("用户ID:".Auth::id().",退出成功！"));
+        return redirect('/admin/login.html');
+    }
+    
+
+    public function check_login()
+    {
+        $userid = Auth::id();
+        if ($userid == null) {
+            echo json_encode(array('ret' => 999, 'msg' => "用户未登录"));
+            exit();
+        }
     }
 
     

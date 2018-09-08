@@ -5507,7 +5507,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff2d3032', e
 
 
 #header-container {
-  height: 76px;
+  /*height: 76px;*/
+  height: 47px;
 }
 
 .base-layout #header-container {
@@ -6093,7 +6094,7 @@ filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff59B14F', en
   position: relative;
   margin: 0 -20px;
   padding: 0 20px;
-  min-height: 100px;
+  min-height: 60px;
   border-bottom: 1px solid #babecc;
   background: url("../img/background/body-bg-02-15.jpg") repeat scroll 0 0;
 }
@@ -6276,8 +6277,8 @@ legend .toggle-btn[class*=" aweso-icon-"]:before {
   position: relative;
   min-height: 30px;
   padding: 5px 0 4px;
-  border-bottom: 1px solid #bbb;
-  -moz-border-radius-topright: 4px;
+/*  border-bottom: 1px solid #bbb;
+*/  -moz-border-radius-topright: 4px;
   -moz-border-radius-topleft: 4px;
   -webkit-border-radius: 4px 4px 0px 0px;
   border-radius: 4px 4px 0px 0px;
@@ -8310,7 +8311,8 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endCo
 /* sidebar */
 
 .sidebar {
-  top: 76px
+  /*top: 76px*/
+  top: 47px
 }
 
 .base-layout .sidebar {
