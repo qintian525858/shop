@@ -1,4 +1,73 @@
+<script type="text/ng-template" id="usersPasswordModal.html">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fontello-icon-cancel-1" ng-click="cancel()"></i></button>
+        <h4>密码修改</h4>
+    </div>
+    <div class="modal-body">
+        <form name="myForm" ng-submit="submitForm(myForm.$valid)" class="form-horizontal" novalidate>
+            <div class="row-fluid">
+                <div class="span12">
+                    <ul class="form-list label-right list-bordered dotted">
+                        <li class="control-group">
+                            <label for="accountPrefix" class="control-label">密码</label>
+                            <div class="controls">
+                                <input class="span8" type="text" ng-model="users.password1" required>
+                            </div>
+                        </li>
+                        <li class="control-group">
+                            <label for="accountPrefix" class="control-label">密码确认</label>
+                            <div class="controls">
+                                <input class="span8" type="text" ng-model="users.password2" required>
+                            </div>
+                        </li>                           
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-boo"  ng-click="cancel()">取消</button>
+        <button type="button" class="btn btn-green" ng-disabled="myForm.$invalid || btn_spinner_display" ng-click="confirm()">确定</button>
+    </div>
+</script>
 
+
+
+<script type="text/ng-template" id="usersModal.html">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fontello-icon-cancel-1" ng-click="cancel()"></i></button>
+        <h4>管理员增加</h4>
+    </div>
+    <div class="modal-body">
+        <form name="myForm" ng-submit="submitForm(myForm.$valid)" class="form-horizontal" novalidate>
+            <div class="row-fluid">
+                <div class="span12">
+                    <ul class="form-list label-right list-bordered dotted">
+                        <!-- <li class="section-form">
+                            <h4>Personal data</h4>
+                        </li> -->
+                        <li class="control-group">
+                            <label for="accountPrefix" class="control-label">账号</label>
+                            <div class="controls">
+                                <input class="span8" type="text" ng-model="usersinfo.name" required>
+                            </div>
+                        </li> 
+                        <li class="control-group">
+                            <label for="accountPrefix" class="control-label">密码</label>
+                            <div class="controls">
+                                <input class="span8" type="text" ng-model="usersinfo.password" required>
+                            </div>
+                        </li>                        
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-boo"  ng-click="cancel()">取消</button>
+        <button type="button" class="btn btn-green" ng-disabled="myForm.$invalid || btn_spinner_display" ng-click="confirm()">确定</button>
+    </div>
+</script>
 
 
 <div class="row-fluid page-head">
@@ -16,7 +85,7 @@
                         <div class="widget-header">
                         <h4><i class="fontello-icon-edit"></i> </h4>
                         <div class="widget-tool">
-                            <a class="btn btn-green btn-small btn-glyph" href="javascript:void(0);">新　增</a>
+                            <a class="btn btn-green btn-small btn-glyph" ng-click="usersModal(null)">新　增</a>
                         </div>
                     </div>
                 </div>
@@ -35,7 +104,11 @@
                        <tr ng-repeat="row in list">
                             <td>{{row.id}}</td>
                             <td>{{row.name}}</td>
-                            <td>{{row.name}}</td>
+                            <td>
+                                <i class="fontello-icon-edit" title="修改密码" ng-click="usersPasswordModal(row)"></i>  
+                                <i class="fontello-icon-trash-1" title="删除账号" ng-click="usersRemoveModal(row)"></i>
+                                <!-- <i class="fontello-icon-wrench-1" title="设置权限" ng-click="usersJurisdictionModal(row)"></i> -->
+                            </td>
                        </tr>
                     </tbody>
                 </table>

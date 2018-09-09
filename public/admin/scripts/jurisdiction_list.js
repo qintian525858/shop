@@ -24,14 +24,15 @@ angular.module('myApp').controller('JurisdictionCtrl', function($scope, Jurisdic
         return $http.post(url, data);
     };
 
-   
-
     return {
         getDada: function () {
             return getDada();
         }
-        
+    
     };
 }]);
+
+
+
 
 

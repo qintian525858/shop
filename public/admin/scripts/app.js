@@ -24,6 +24,16 @@
                 }
             }).
 
+            when('/role_list', {
+                templateUrl: 'views/role_list.html',
+                controller: 'RoleCtrl',
+                resolve: {
+                    deps: ["$ocLazyLoad", function (a) {
+                        return a.load(["scripts/role_list.js"])
+                    }]
+                }
+            }).
+
             otherwise({redirectTo: '/msg'});
         }
     ).controller("indexCtr", function($scope, $http, $filter, $cookieStore, $interval, indexService) {
@@ -87,12 +97,11 @@
                 link: function (scope, element, attributes) {
                     var hasAccess = false;
                     
-                    angular.forEach(JSON.parse($window.localStorage["permissions"] || '[]'), function (permission) {
+                    angular.forEach(JSON.parse($window.localStorage["access"] || '[]'), function (permission) {
                         if(attributes.myAccess == permission) {
                             hasAccess = true;
                         }
                     });
-
 
                     if (!hasAccess) {
                         angular.forEach(element.children(), function (child) {

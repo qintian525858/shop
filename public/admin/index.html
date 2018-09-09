@@ -87,11 +87,12 @@
             <!-- // sidebar item - profile -->
             
             <ul id="mainSideMenu" class="nav nav-list nav-side">
-                <li class="accordion-group">
+                <li class="accordion-group" my-access="admin">
                     <div class="accordion-heading"> <a active_href="#accDash" data-parent="#mainSideMenu" data-toggle="collapse" class="accordion-toggle"> <span class="item-icon fontello-icon-monitor"></span> <i class="chevron fontello-icon-right-open-3"></i> 管理员 </a> </div>
                     <ul class="accordion-content nav nav-list collapse" id="accDash">
-                        <li> <a href="#/users_list"> <i class="fontello-icon-right-dir"></i>管理员列表</a> </li>
-                        <li> <a href="#jurisdiction_list"> <i class="fontello-icon-right-dir"></i>权限列表</a> </li>
+                        <li my-access="admin_list"> <a href="#/users_list"> <i class="fontello-icon-right-dir"></i>管理员列表</a> </li>
+                        <li my-access="admin_role"> <a href="#/role_list"> <i class="fontello-icon-right-dir"></i>角色列表</a> </li>
+                        <li my-access="admin_jurisdiction"> <a href="#/jurisdiction_list"> <i class="fontello-icon-right-dir"></i>权限列表</a> </li>
                     </ul>
                 </li>
                 <!-- // item accordionMenu Dashboard -->

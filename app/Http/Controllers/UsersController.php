@@ -28,18 +28,32 @@ class UsersController extends Controller {
 
     public function login() {
         $params = $this->getAngularjsParam();
+        $res['ret'] = 0;
+        $res['msg'] = 'ok';
         $account = isset($params->username) ? trim($params->username) : "" ;
         $passwd = isset($params->password) ? trim($params->password) : "" ;
 
         if(Auth::attempt(array('name' => $account, 'password' => $passwd))) {
+            $usersTabs = DB::table('users')->where('name',$account)->get(['*']);
+            if($usersTabs[0]['status'] == 1){
+                $res['ret'] = 1;
+                $res['msg'] = '该账号已经被禁用，请联系管理员';
+                goto END;
+            }
             $adminId = Auth::id();
+            $access = DB::table('users_privilege as up')
+                        ->leftJoin('jurisdictions','jurisdictions.id','=','up.jurisdiction_id')
+                        ->where('up.user_id',$adminId)
+                        ->pluck('jurisdictions.code');
+            $res['access'] = $access;
             $this->logs($this->logs_path,("用户ID:".$adminId.",".$account."登录成功！"));
-            return response()->json(array('ret' => 0, 'msg' => "ok"));
         } else {
             
-            return response()->json(array('ret' => 1, 'msg' => "用户名或密码错误"));
+            $res['ret'] = 1;
+            $res['msg'] = '用户名或者密码错误';
         }
-        
+    END:
+        return Response::json($res);  
     }
 
     public function logout()
