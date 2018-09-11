@@ -10,6 +10,10 @@ use Monolog\Logger;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Formatter\LineFormatter;
 use Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Request;
+
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -42,5 +46,16 @@ class Controller extends BaseController
 		$logger->pushHandler($handler);
 		return $logger;
 	}
+
+    //角色列表名称
+    public function role_name()
+    {
+        $data = array();
+        $tabs = DB::table('roles')->where('is_delete',0)->get(['*']);
+        foreach ($tabs as $key => $value) {
+            $data[$value['id']] = $value['name'];
+        }
+        return $data;
+    }
     
 }

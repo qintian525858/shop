@@ -36,9 +36,11 @@ class AdminController extends Controller {
         $res['ret'] = 0;
         $res['msg'] = 'ok';
         $tabs = DB::table('users')
-                ->where('status',0)
-                ->orderBy('id','desc')
-                ->select(['*'])
+                ->leftJoin('users_role','users_role.user_id','=','users.id')
+                ->leftJoin('roles','roles.id','=','users_role.role_id')
+                ->where('users.status',0)
+                ->orderBy('users.id','desc')
+                ->select(['users.*','roles.name as role_name','roles.id as role_id'])
                 ->paginate($params["itemsPerPage"])
                 ->toArray();
         $res['data'] = $tabs;
@@ -65,7 +67,14 @@ class AdminController extends Controller {
         $sqlData['email'] = $usersinfo['name'];
         $sqlData['password'] = Hash::make($usersinfo['password']);
         $lastId = DB::table('users')->insertGetId($sqlData);
+
+        DB::table('users_role')->insert(['user_id'=>$lastId,'role_id'=>$usersinfo['role_id']]);
+
+        $role_name = $this->role_name();
+        $this->logs($this->logs_path,("用户ID:".Auth::ID().",创建账号ID:".$lastId.":".$usersinfo['name'].",".$role_name[$usersinfo['role_id']]));
+
         $usersinfo['id'] = $lastId;
+        $usersinfo['role_name'] = $role_name[$usersinfo['role_id']];
         $res['data'] = $usersinfo;
     END:
         return Response::json($res);
@@ -133,6 +142,7 @@ class AdminController extends Controller {
         $res['msg'] = 'ok';
         $roleinfo = $params['roleinfo'];
         DB::table('roles')->where('id',$roleinfo['id'])->update(['is_delete'=>1]);
+        $this->logs($this->logs_path,("用户ID:".Auth::ID()."，删除角色ID：".$roleinfo['id']));
         $res['data'] = $roleinfo;
     END:
         return Response::json($res);
@@ -157,6 +167,7 @@ class AdminController extends Controller {
         $res['ret'] = 0;
         $res['msg'] = 'ok';
         DB::table('users')->where('id',$params['usersinfo']['id'])->update(['status'=>1]);
+        $this->logs($this->logs_path,("用户ID:".Auth::ID()."，删除账户ID：".$params['usersinfo']['id']));
         $res['data'] = $params['usersinfo'];
     END:
         return Response::json($res);
@@ -168,6 +179,25 @@ class AdminController extends Controller {
         $res['ret'] = 0;
         $res['msg'] = '密码修改成功';
         DB::table('users')->where('id',$params['usersinfo']['id'])->update(['password'=>Hash::make($params['users']['password1'])]);
+        $this->logs($this->logs_path,("用户ID:".Auth::ID()."，修改账户ID：".$params['usersinfo']['id']."的密码：".$params['users']['password1']));
+    END:
+        return Response::json($res);
+    }
+
+
+    public function users_role_edit()
+    {
+        $params = $this->getAngularjsParam(true);
+        //dd($params);
+        $usersinfo = $params['usersinfo'];
+        $res['ret'] = 0;
+        $res['msg'] = '管理员角色修改成功';
+        $tabs = DB::table('users_role')->where('user_id',$usersinfo['id'])->update(['role_id'=>$usersinfo['role_id']]);
+
+        $role_name = $this->role_name();
+        $this->logs($this->logs_path,("用户ID:".Auth::ID()."，修改账户：".$usersinfo['name']."的角色：".$role_name[$usersinfo['role_id']]));
+        $params['usersinfo']['role_name'] = $role_name[$usersinfo['role_id']];
+        $res['data'] = $params['usersinfo'];
     END:
         return Response::json($res);
     }

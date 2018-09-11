@@ -122,6 +122,7 @@ Version: 3.2 Timestamp: Mon Sep 10 10:38:04 PDT 2012
   -o-text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
+  text-align: left;
 }
 
 .select2-container .select2-choice abbr {

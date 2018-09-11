@@ -2,7 +2,7 @@
     'use strict';
 
     //路由
-    angular.module('myApp', ['ngRoute', 'oc.lazyLoad', 'commonDirectives' , 'ui.bootstrap', 'ngSanitize', 'ngCookies',"dndLists", "ngCsv"])
+    angular.module('myApp', ['ngRoute', 'oc.lazyLoad', 'commonDirectives','rt.select2','ui.bootstrap', 'ngSanitize', 'ngCookies',"dndLists", "ngCsv"])
         .config(function($routeProvider, $locationProvider) {
             var version = 20180416;
             $routeProvider.when('/users_list', {
@@ -10,7 +10,10 @@
                 controller: 'UsersCtrl',
                 resolve: {
                     deps: ["$ocLazyLoad", function (a) {
-                        return a.load(["scripts/users_list.js"])
+                        return a.load(["scripts/users_list.js",
+                                       //"../vendor/angular-selector/angular-selector.min.js",
+                                       //"../vendor/angular-selector/angular-selector.min.css"
+                                      ])
                     }]
                 }
             }).

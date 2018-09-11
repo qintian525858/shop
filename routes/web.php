@@ -26,6 +26,7 @@ Route::any('api/admin/users_add', 'AdminController@users_add');
 Route::any('api/admin/users_edit', 'AdminController@users_edit');
 Route::any('api/admin/users_remove', 'AdminController@users_remove');
 Route::any('api/admin/users_password', 'AdminController@users_password');
+Route::any('api/admin/users_role_edit', 'AdminController@users_role_edit');
 
 Route::any('api/admin/role_list', 'AdminController@role_list');
 Route::any('api/admin/role_add', 'AdminController@role_add');

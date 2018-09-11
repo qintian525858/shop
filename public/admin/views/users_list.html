@@ -1,3 +1,31 @@
+<script type="text/ng-template" id="usersRoleModal.html">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fontello-icon-cancel-1" ng-click="cancel()"></i></button>
+        <h4>角色修改</h4>
+    </div>
+    <div class="modal-body">
+        <form name="myForm" ng-submit="submitForm(myForm.$valid)" class="form-horizontal" novalidate>
+            <div class="row-fluid">
+                <div class="span12">
+                    <ul class="form-list label-right list-bordered dotted">
+                        <li class="control-group">
+                            <label for="role_id" class="control-label">角色<span class="required">*</span></label>
+                            <div class="controls">
+                                <select2 ng-model="usersinfo.role_id" placeholder="请选择角色" s2-options="val.id as val.name for val in roleList" options="{allowClear:true}" class="control-label span8" required></select2>
+                            </div>
+                        </li>
+                     
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-boo"  ng-click="cancel()">取消</button>
+        <button type="button" class="btn btn-green" ng-disabled="myForm.$invalid || btn_spinner_display" ng-click="confirm()">确定</button>
+    </div>
+</script>
+
 <script type="text/ng-template" id="usersPasswordModal.html">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fontello-icon-cancel-1" ng-click="cancel()"></i></button>
@@ -47,13 +75,22 @@
                             <h4>Personal data</h4>
                         </li> -->
                         <li class="control-group">
-                            <label for="accountPrefix" class="control-label">账号</label>
+                            <label for="accountPrefix" class="control-label">账号<span class="required">*</span></label>
                             <div class="controls">
                                 <input class="span8" type="text" ng-model="usersinfo.name" required>
                             </div>
                         </li> 
+
                         <li class="control-group">
-                            <label for="accountPrefix" class="control-label">密码</label>
+                            <label for="role_id" class="control-label">角色<span class="required">*</span></label>
+                            <div class="controls">
+                                <select2 ng-model="usersinfo.role_id" placeholder="请选择角色" s2-options="val.id as val.name for val in roleList" options="{allowClear:true}" class="control-label span8" required></select2>
+                            </div>
+                        </li>
+
+                        
+                        <li class="control-group">
+                            <label for="accountPrefix" class="control-label">密码<span class="required">*</span></label>
                             <div class="controls">
                                 <input class="span8" type="text" ng-model="usersinfo.password" required>
                             </div>
@@ -97,6 +134,7 @@
                         <tr>
                             <th>ID</th>
                             <th>用户名</th>
+                            <th>角色</th>
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -104,8 +142,10 @@
                        <tr ng-repeat="row in list">
                             <td>{{row.id}}</td>
                             <td>{{row.name}}</td>
+                            <td>{{row.role_name}}</td>
                             <td>
-                                <i class="fontello-icon-edit" title="修改密码" ng-click="usersPasswordModal(row)"></i>  
+                                <i class="fontello-icon-edit" title="修改角色" ng-click="usersRoleModal(row)"></i>  
+                                <i class="fontello-icon-key" title="修改密码" ng-click="usersPasswordModal(row)"></i>  
                                 <i class="fontello-icon-trash-1" title="删除账号" ng-click="usersRemoveModal(row)"></i>
                                 <!-- <i class="fontello-icon-wrench-1" title="设置权限" ng-click="usersJurisdictionModal(row)"></i> -->
                             </td>
@@ -116,3 +156,4 @@
         </div>                        
     </section>      
 </div> 
+
