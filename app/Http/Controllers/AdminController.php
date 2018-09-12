@@ -36,8 +36,8 @@ class AdminController extends Controller {
         $res['ret'] = 0;
         $res['msg'] = 'ok';
         $tabs = DB::table('users')
-                ->leftJoin('users_role','users_role.user_id','=','users.id')
-                ->leftJoin('roles','roles.id','=','users_role.role_id')
+                ->leftJoin('users_roles','users_roles.user_id','=','users.id')
+                ->leftJoin('roles','roles.id','=','users_roles.role_id')
                 ->where('users.status',0)
                 ->orderBy('users.id','desc')
                 ->select(['users.*','roles.name as role_name','roles.id as role_id'])
@@ -68,7 +68,7 @@ class AdminController extends Controller {
         $sqlData['password'] = Hash::make($usersinfo['password']);
         $lastId = DB::table('users')->insertGetId($sqlData);
 
-        DB::table('users_role')->insert(['user_id'=>$lastId,'role_id'=>$usersinfo['role_id']]);
+        DB::table('users_roles')->insert(['user_id'=>$lastId,'role_id'=>$usersinfo['role_id']]);
 
         $role_name = $this->role_name();
         $this->logs($this->logs_path,("用户ID:".Auth::ID().",创建账号ID:".$lastId.":".$usersinfo['name'].",".$role_name[$usersinfo['role_id']]));
@@ -192,12 +192,26 @@ class AdminController extends Controller {
         $usersinfo = $params['usersinfo'];
         $res['ret'] = 0;
         $res['msg'] = '管理员角色修改成功';
-        $tabs = DB::table('users_role')->where('user_id',$usersinfo['id'])->update(['role_id'=>$usersinfo['role_id']]);
+        $tabs = DB::table('users_roles')->where('user_id',$usersinfo['id'])->update(['role_id'=>$usersinfo['role_id']]);
 
         $role_name = $this->role_name();
         $this->logs($this->logs_path,("用户ID:".Auth::ID()."，修改账户：".$usersinfo['name']."的角色：".$role_name[$usersinfo['role_id']]));
         $params['usersinfo']['role_name'] = $role_name[$usersinfo['role_id']];
         $res['data'] = $params['usersinfo'];
+    END:
+        return Response::json($res);
+    }
+
+
+    public function role_select_jurisdiction()
+    {
+        $params = $this->getAngularjsParam(true);
+        //dd($params);
+        $usersinfo = $params['usersinfo'];
+        $res['ret'] = 0;
+        $res['msg'] = 'ok';
+        $tabs = DB::table('roles_jurisdictions')->where('role_id',$usersinfo['role_id'])->get(['jurisdiction_id']);
+        $res['data'] = $tabs;
     END:
         return Response::json($res);
     }

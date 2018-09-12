@@ -15,18 +15,60 @@ angular.module('myApp').controller('JurisdictionCtrl', function($scope, Jurisdic
     int_data();
 
 
+    //获取角色列表
+    $scope.role_list = function()
+    {
+        JurisdictionService.role_list().success(function (response) {
+            $scope.roleList = response.data;
+        });
+    }
+    $scope.role_list();
 
+
+    //根据角色获取权限
+    $scope.role_select_jurisdiction = function()
+    {
+        console.log($scope.usersinfo.role_id);
+        JurisdictionService.role_select_jurisdiction($scope.usersinfo).success(function(response){
+            if(response.ret == 999){
+                window.location = "/admin/login.html";
+            }else if(response.ret == 0){
+                
+            }else{
+                alert(response.msg);
+            }
+       });
+    }
 
 }).service('JurisdictionService', ['$http', function ($http) {
-    var getDada = function (search,currentPage,itemsPerPage) {
+    var getDada = function () {
         var url = '/api/admin/jurisdiction_list';
         var data = {};
         return $http.post(url, data);
     };
 
+    var role_list = function () {
+        var url = '/api/admin/role_list';
+        var data = {};
+        return $http.post(url, data);
+    };
+
+    var role_select_jurisdiction = function (usersinfo) {
+        var url = '/api/admin/role_select_jurisdiction';
+        var data = {usersinfo:usersinfo};
+        return $http.post(url, data);
+    };
+
+
     return {
         getDada: function () {
             return getDada();
+        },
+        role_list: function () {
+            return role_list();
+        },
+        role_select_jurisdiction: function (usersinfo) {
+            return role_select_jurisdiction(usersinfo);
         }
     
     };

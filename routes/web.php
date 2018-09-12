@@ -33,5 +33,6 @@ Route::any('api/admin/role_add', 'AdminController@role_add');
 Route::any('api/admin/role_edit', 'AdminController@role_edit');
 Route::any('api/admin/role_remove', 'AdminController@role_remove');
 Route::any('api/admin/jurisdiction_list', 'AdminController@jurisdiction_list');
+Route::any('api/admin/role_select_jurisdiction', 'AdminController@role_select_jurisdiction');
 
 
