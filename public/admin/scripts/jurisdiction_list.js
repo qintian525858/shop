@@ -28,12 +28,19 @@ angular.module('myApp').controller('JurisdictionCtrl', function($scope, Jurisdic
     //根据角色获取权限
     $scope.role_select_jurisdiction = function()
     {
+        $scope.jurisdiction_map = [];
         console.log($scope.usersinfo.role_id);
         JurisdictionService.role_select_jurisdiction($scope.usersinfo).success(function(response){
             if(response.ret == 999){
                 window.location = "/admin/login.html";
             }else if(response.ret == 0){
-                
+                if(response.data.length ！= 0){
+                    angular.forEach($scope.list, function(value,key,array){
+                        angular.forEach(response.data, function(v,k,arr){
+                        
+                        });
+                    });
+                }
             }else{
                 alert(response.msg);
             }
