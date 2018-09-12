@@ -34,10 +34,10 @@ angular.module('myApp').controller('JurisdictionCtrl', function($scope, Jurisdic
             if(response.ret == 999){
                 window.location = "/admin/login.html";
             }else if(response.ret == 0){
-                if(response.data.length ！= 0){
+                if(response.data.length != 0){
                     angular.forEach($scope.list, function(value,key,array){
                         angular.forEach(response.data, function(v,k,arr){
-                        
+                            
                         });
                     });
                 }
@@ -45,6 +45,43 @@ angular.module('myApp').controller('JurisdictionCtrl', function($scope, Jurisdic
                 alert(response.msg);
             }
        });
+    }
+
+
+    //全选和反选
+    //$scope['init_spinner_display'+$scope.tab_active] = false;
+    $scope.all = function()
+    {
+        console.log($scope.selectAll);
+        if($scope.selectAll){
+            angular.forEach($scope.list, function (value,key,array) {
+                $scope['selectOne_'+value.id] = true;
+            })
+        }else{
+            angular.forEach($scope.list, function (value,key,array) {
+                $scope['selectOne_'+value.id] = false;
+            })
+        }
+    }
+
+    $scope.only = function(val)
+    {
+        if($scope['selectOne_'+val.id]){
+            $scope['selectOne_'+val.id] = false;
+        }else{
+            $scope['selectOne_'+val.id] = true;
+        }
+    }
+
+    $scope.confirm = function()
+    {
+        $scope.selected = []
+        angular.forEach($scope.list, function (value,key,array) {
+            if($scope['selectOne_'+value.id]){
+                $scope.selected.push(value.id);
+            }
+        })
+      console.log(JSON.stringify($scope.selected));
     }
 
 }).service('JurisdictionService', ['$http', function ($http) {

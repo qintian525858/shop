@@ -121,13 +121,13 @@
                     <table class="table boo-table table-content table-hover">
                         <thead>
                             <tr>
-                                <th class="check-col"><input type="checkbox" class="checkbox check-all" name="check-all"></th>
+                                <th class="check-col"><input type="checkbox" class="checkbox check-all" ng-model="selectAll" ng-click="all()"></th>
                                 <th>权限</th>
                             </tr>
                         </thead>
                         <tbody>
                            <tr ng-repeat="row in list">
-                                <td><input type="checkbox" class="checkbox check-row" value="0" name="checkRow"></td>
+                                <td><input type="checkbox" class="checkbox check-row" ng-checked="selectOne_{{row.id}}" ng-click="only(row)"></td>
                                 <td>{{row.name}}</td>
                            </tr>
                         </tbody>
