@@ -1,4 +1,6 @@
 angular.module('myApp').controller('JurisdictionCtrl', function($scope, JurisdictionService, $location, $routeParams , $uibModal) {
+    $scope.usersinfo = {};
+    $scope.usersinfo.role_id = 0;
     function int_data()
     {
        JurisdictionService.getDada().success(function(response){
@@ -29,16 +31,22 @@ angular.module('myApp').controller('JurisdictionCtrl', function($scope, Jurisdic
     $scope.role_select_jurisdiction = function()
     {
         $scope.jurisdiction_map = [];
-        console.log($scope.usersinfo.role_id);
+        if($scope.usersinfo.role_id == null){
+            angular.forEach($scope.list, function(value,key,array){
+                $scope['selectOne_'+value.id] = false;
+            });
+            return false;
+        }
         JurisdictionService.role_select_jurisdiction($scope.usersinfo).success(function(response){
             if(response.ret == 999){
                 window.location = "/admin/login.html";
             }else if(response.ret == 0){
                 if(response.data.length != 0){
                     angular.forEach($scope.list, function(value,key,array){
-                        angular.forEach(response.data, function(v,k,arr){
-                            
-                        });
+                        $scope['selectOne_'+value.id] = false;
+                    });
+                    angular.forEach(response.data, function(v,k,arr){
+                        $scope['selectOne_'+v.jurisdiction_id] = true;
                     });
                 }
             }else{
@@ -81,7 +89,22 @@ angular.module('myApp').controller('JurisdictionCtrl', function($scope, Jurisdic
                 $scope.selected.push(value.id);
             }
         })
-      console.log(JSON.stringify($scope.selected));
+        console.log(JSON.stringify($scope.usersinfo.role_id));
+        if($scope.selected.length == 0 || $scope.usersinfo.role_id == 0){
+            alert("请选择权限和管理员角色");
+            return false;
+        }
+
+        JurisdictionService.role_add_jurisdiction($scope.usersinfo,$scope.selected).success(function(response){
+            if(response.ret == 999){
+                window.location = "/admin/login.html";
+            }else if(response.ret == 0){
+    
+            }else{
+                alert(response.msg);
+            }
+       });
+
     }
 
 }).service('JurisdictionService', ['$http', function ($http) {
@@ -103,6 +126,12 @@ angular.module('myApp').controller('JurisdictionCtrl', function($scope, Jurisdic
         return $http.post(url, data);
     };
 
+    var role_add_jurisdiction = function(usersinfo,selected){
+        var url = '/api/admin/role_add_jurisdiction';
+        var data = {usersinfo:usersinfo,selected:selected};
+        return $http.post(url, data);
+    };
+
 
     return {
         getDada: function () {
@@ -113,6 +142,9 @@ angular.module('myApp').controller('JurisdictionCtrl', function($scope, Jurisdic
         },
         role_select_jurisdiction: function (usersinfo) {
             return role_select_jurisdiction(usersinfo);
+        },
+        role_add_jurisdiction: function (usersinfo,selected) {
+            return role_add_jurisdiction(usersinfo,selected);
         }
     
     };

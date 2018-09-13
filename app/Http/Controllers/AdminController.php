@@ -216,6 +216,23 @@ class AdminController extends Controller {
         return Response::json($res);
     }
 
+    public function role_add_jurisdiction()
+    {
+        $params = $this->getAngularjsParam(true);
+        //dd($params);
+        $usersinfo = $params['usersinfo'];
+        $res['ret'] = 0;
+        $res['msg'] = 'ok';
+        DB::table('roles_jurisdictions')->where('role_id',$usersinfo['role_id'])->delete();
+        foreach ($params['selected'] as $key => $value) {
+            $sqlData = array();
+            $sqlData['role_id'] = $usersinfo['role_id'];
+            $sqlData['jurisdiction_id'] = $value;
+            DB::table('roles_jurisdictions')->insert($sqlData);
+        }
+    END:
+        return Response::json($res);
+    }
 
 
 
