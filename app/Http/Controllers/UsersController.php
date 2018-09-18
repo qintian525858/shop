@@ -42,10 +42,11 @@ class UsersController extends Controller {
             }
             $adminId = Auth::id();
             $access = ['admin','admin_list','admin_role','admin_jurisdiction','web_add','web_edit'];
-            // $access = DB::table('users_privilege as up')
-            //             ->leftJoin('jurisdictions','jurisdictions.id','=','up.jurisdiction_id')
-            //             ->where('up.user_id',$adminId)
-            //             ->pluck('jurisdictions.code');
+            $access = DB::table('users_roles as ur')
+                        ->leftJoin('roles_jurisdictions as rj','rj.role_id','=','ur.role_id')
+                        ->leftJoin('jurisdictions as j','j.id','=','rj.jurisdiction_id')
+                        ->where('ur.user_id',$adminId)
+                        ->pluck('j.code');
             $res['access'] = $access;
             $this->logs($this->logs_path,("用户ID:".$adminId.",".$account."登录成功！"));
         } else {

@@ -37,6 +37,16 @@
                 }
             }).
 
+            when('/password', {
+                templateUrl: 'views/password.html',
+                controller: 'PasswordCtrl',
+                resolve: {
+                    deps: ["$ocLazyLoad", function (a) {
+                        return a.load(["scripts/password.js"])
+                    }]
+                }
+            }).
+
             otherwise({redirectTo: '/msg'});
         }
     ).controller("indexCtr", function($scope, $http, $filter, $cookieStore, $interval, indexService) {

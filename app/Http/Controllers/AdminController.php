@@ -216,6 +216,35 @@ class AdminController extends Controller {
         return Response::json($res);
     }
 
+    public function role_add_jurisdiction()
+    {
+        $params = $this->getAngularjsParam(true);
+        //dd($params);
+        $usersinfo = $params['usersinfo'];
+        $res['ret'] = 0;
+        $res['msg'] = 'ok';
+        DB::table('roles_jurisdictions')->where('role_id',$usersinfo['role_id'])->delete();
+        foreach ($params['selected'] as $key => $value) {
+            $sqlData = array();
+            $sqlData['role_id'] = $usersinfo['role_id'];
+            $sqlData['jurisdiction_id'] = $value;
+            DB::table('roles_jurisdictions')->insert($sqlData);
+        }
+    END:
+        return Response::json($res);
+    }
+
+    public function update_password()
+    {
+        $params = $this->getAngularjsParam(true);
+        $usersinfo = $params['usersinfo'];
+        $res['ret'] = 0;
+        $res['msg'] = 'ok';
+        DB::table('users')->where('id',Auth::id())->update(['password'=>Hash::make($usersinfo['password1'])]);
+        $this->logs($this->logs_path,("用户ID:".Auth::id()."，个人设置密码：".$usersinfo['password1']));
+    END:
+        return Response::json($res);
+    }
 
     
 
