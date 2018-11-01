@@ -48,7 +48,12 @@ angular.module('myApp').controller('JurisdictionCtrl', function($scope, Jurisdic
                     angular.forEach(response.data, function(v,k,arr){
                         $scope['selectOne_'+v.jurisdiction_id] = true;
                     });
+                }else{
+                    angular.forEach($scope.list, function(value,key,array){
+                        $scope['selectOne_'+value.id] = false;
+                    });
                 }
+
             }else{
                 alert(response.msg);
             }
@@ -90,8 +95,8 @@ angular.module('myApp').controller('JurisdictionCtrl', function($scope, Jurisdic
             }
         })
         console.log(JSON.stringify($scope.usersinfo.role_id));
-        if($scope.selected.length == 0 || $scope.usersinfo.role_id == 0){
-            alert("请选择权限和管理员角色");
+        if($scope.usersinfo.role_id == 0){
+            alert("请选择管理员角色");
             return false;
         }
 
@@ -99,7 +104,7 @@ angular.module('myApp').controller('JurisdictionCtrl', function($scope, Jurisdic
             if(response.ret == 999){
                 window.location = "/admin/login.html";
             }else if(response.ret == 0){
-    
+                alert(response.msg);
             }else{
                 alert(response.msg);
             }
