@@ -100,6 +100,7 @@ angular.module('myApp').controller('JurisdictionCtrl', function($scope, Jurisdic
             return false;
         }
 
+        $scope.btn_spinner_display = true;
         JurisdictionService.role_add_jurisdiction($scope.usersinfo,$scope.selected).success(function(response){
             if(response.ret == 999){
                 window.location = "/admin/login.html";
@@ -108,6 +109,7 @@ angular.module('myApp').controller('JurisdictionCtrl', function($scope, Jurisdic
             }else{
                 alert(response.msg);
             }
+            $scope.btn_spinner_display = false;
        });
 
     }
