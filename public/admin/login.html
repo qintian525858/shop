@@ -94,6 +94,8 @@
             LoginService.login($scope.username, $scope.password).success(function (data) {
                 if(data.ret == 0) {
                     $cookieStore.put("username", $scope.username);
+                    $cookieStore.put("userid", data.userid);
+                    
                     $window.localStorage["access"]=JSON.stringify(data.access);
                     window.location = "/admin/index.html";
                 } else {

@@ -37,4 +37,6 @@ Route::any('api/admin/role_select_jurisdiction', 'AdminController@role_select_ju
 Route::any('api/admin/role_add_jurisdiction', 'AdminController@role_add_jurisdiction');
 Route::any('api/admin/update_password', 'AdminController@update_password');
 
-
+//websocket
+Route::any('api/websocket/users_list', 'WebsocketController@users_list');
+Route::any('api/websocket/push_msg', 'WebsocketController@push_msg');

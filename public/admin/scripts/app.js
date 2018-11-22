@@ -47,6 +47,26 @@
                 }
             }).
 
+            when('/push_msg', {
+                templateUrl: 'views/push_msg.html',
+                controller: 'PushmsgCtrl',
+                resolve: {
+                    deps: ["$ocLazyLoad", function (a) {
+                        return a.load(["scripts/push_msg.js"])
+                    }]
+                }
+            }).
+
+            when('/chat_room', {
+                templateUrl: 'views/chat_room.html',
+                controller: 'ChatroomCtrl',
+                resolve: {
+                    deps: ["$ocLazyLoad", function (a) {
+                        return a.load(["scripts/chat_room.js"])
+                    }]
+                }
+            }).
+
             otherwise({redirectTo: '/msg'});
         }
     ).controller("indexCtr", function($scope, $http, $filter, $cookieStore, $interval, indexService) {

@@ -48,6 +48,7 @@ class UsersController extends Controller {
                         ->where('ur.user_id',$adminId)
                         ->pluck('j.code');
             $res['access'] = $access;
+            $res['userid'] = $adminId;
             $this->logs($this->logs_path,("用户ID:".$adminId.",".$account."登录成功！"));
         } else {
             
