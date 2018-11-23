@@ -12,7 +12,7 @@ angular.module('myApp').controller('PushmsgCtrl', function($scope, PushmsgServic
 
 	/*websocket notify start*/
 
-	var socket = io('http://192.168.32.44:2120');
+	var socket = io('http://192.168.242.128:2120');
     // uid可以是自己网站的用户id，以便针对uid推送以及统计在线人数
 
     uid = $scope.userid;
